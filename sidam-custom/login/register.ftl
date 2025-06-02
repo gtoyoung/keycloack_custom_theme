@@ -15,20 +15,17 @@
     <form id="kc-register-form" action="${url.registrationAction}" method="post"
           style="display: flex; flex-direction: column; gap: 1.2rem;">
 
-      <div class="form-group" style="display: flex; flex-direction: column; gap: 0.5rem;">
-        <label for="email" style="font-weight: bold;">${msg("email")}</label>
-        <input type="email" id="email" name="email"
-               value="${(register.formData.email!'')}" required
-               style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Nanum Gothic';" />
-      </div>
-
       <#if !realm.registrationEmailAsUsername>
         <div class="form-group" style="display: flex; flex-direction: column; gap: 0.5rem;">
-          <label for="username" style="font-weight: bold;">${msg("username")}</label>
+          <label for="username" style="font-weight: bold;">ID</label>
           <input type="text" id="username" name="username"
                  value="${(register.formData.username!'')}" required autofocus
                  style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Nanum Gothic';" />
         </div>
+
+        <#if messagesPerField.username??>
+          <div class="field-error">${kcSanitize(messagesPerField.username)}</div>
+        </#if>
       </#if>
 
       <div class="form-group" style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -42,6 +39,17 @@
         <input type="password" id="password-confirm" name="password-confirm" required
                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Nanum Gothic';" />
       </div>
+
+      <div class="form-group" style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label for="email" style="font-weight: bold;">${msg("email")}</label>
+        <input type="email" id="email" name="email"
+               value="${(register.formData.email!'')}" required
+               style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Nanum Gothic';" />
+      </div>
+
+      <#if messagesPerField.email??>
+        <div class="field-error">${kcSanitize(messagesPerField.email)}</div>
+      </#if>
 
       <div class="form-footer" style="margin-top: 10px;">
         <button type="submit"
